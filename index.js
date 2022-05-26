@@ -1,7 +1,6 @@
 const wordRegEx = /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}'’]/u;
 
 const addBTagesIfWord = (s) => {
-  // if (/\w/.test(s)) {
   if (wordRegEx.test(s[0])) {
     if (s.length === 1) return `<b>${s}</b>`;
     return `<b>${s.slice(0, Math.floor(s.length / 2))}</b>${s.slice(
@@ -11,15 +10,7 @@ const addBTagesIfWord = (s) => {
   return s;
 };
 
-// some splitting that adds support for diacritics and non-latin text
-// if you want to go the string => array route, which I guess I don't
-// innerText.split(/([\p{Separator}\p{Dash_Punctuation}]+)/u);
-
-const notAWordBoundary = (a, b) =>
-  // /[0-9A-Za-z'’]/.test(a) === /[0-9A-Za-z'’]/.test(b);
-  // /[\w'’]/.test(a) === /[\w'’]/.test(b);
-  // /\p{Script=Latin}/.test(a) === /\p{Script=Latin}/.test(b);
-  wordRegEx.test(a) === wordRegEx.test(b);
+const notAWordBoundary = (a, b) => wordRegEx.test(a) === wordRegEx.test(b);
 
 const isTag = (s) =>
   (s.length === 1 && s === "<") || (/<\w|<\//.test(s) && !/<[0-9]/.test(s));
