@@ -16,3 +16,12 @@ test("parse(html) to add <b> tags to first half of words", () => {
 </p>
 `);
 });
+
+test("parse(html, 'span') to add <span> tags to first half of words", () => {
+  expect(parse(html, "span")).toBe(`<p class="indent">
+<span>Fra</span>nkly <a href=\"/noWhere\"><span>I</span> <span>do</span>n’t <span>th</span>ink <span>th</span>at <span>poli</span>tical <span>awar</span>eness</a> <span>i</span>s
+<span>go</span>ing <span>t</span>o <span>pr</span>ove <span>t</span>he <span>be</span>st <span>medi</span>cine <span>f</span>or <span>o</span>ur <span>cur</span>rent <span>mal</span>ady.
+<em><span>Mo</span>st <span>peo</span>ple</em> <span>kn</span>ow <span>th</span>at <span>fina</span>ncial <strike><span>dictat</span>orship</strike>
+</p>
+`);
+});
