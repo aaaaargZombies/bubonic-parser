@@ -1,4 +1,4 @@
-const wordRegEx = /[\p{Lu}\p{Ll}\p{Lt}\p{Lm}\p{Lo}'’]/u;
+const wordRegEx = /[\p{L}'’0-9]/u;
 
 const addBTagesIfWord = (s) => {
   if (wordRegEx.test(s[0])) {
