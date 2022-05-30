@@ -13,7 +13,7 @@ const addBTagesIfWord = (s) => {
 const notAWordBoundary = (a, b) => wordRegEx.test(a) === wordRegEx.test(b);
 
 const isTag = (s) =>
-  (s.length === 1 && s === "<") || (/<\w|<\//.test(s) && !/<[0-9]/.test(s));
+  (s.length === 1 && s === "<") || (/^<\w|^<\//.test(s) && !/<[0-9]/.test(s));
 
 const processInput = (string) => {
   // iterate over string pushing letters onto an expression.
