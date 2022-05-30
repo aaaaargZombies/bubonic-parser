@@ -53,6 +53,4 @@ const parse = (string, tag = "b") => {
   return result + addTagsIfWord(expression);
 };
 
-document
-  .querySelectorAll("p")
-  .forEach((p) => (p.innerHTML = processInput(p.innerHTML)));
+export { parse, wordRegEx, addTagsIfWord, notAWordBoundary, isTag };
