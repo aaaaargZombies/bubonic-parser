@@ -1,13 +1,10 @@
 const wordRegEx = /[\p{L}'’0-9]/u;
 
-const addTagsIfWord = (s, tag) => {
-  if (wordRegEx.test(s[0])) {
-    if (s.length === 1) return `<${tag}>${s}</${tag}>`;
-    return `<${tag}>${s.slice(0, Math.floor(s.length / 2))}</${tag}>${s.slice(
-      Math.floor(s.length / 2),
-    )}`;
-  }
-  return s;
+const addTag = (s, tag) => {
+  if (s.length === 1) return `<${tag}>${s}</${tag}>`;
+  return `<${tag}>${s.slice(0, Math.floor(s.length / 2))}</${tag}>${s.slice(
+    Math.floor(s.length / 2),
+  )}`;
 };
 
 const notAWordBoundary = (a, b) => wordRegEx.test(a) === wordRegEx.test(b);
@@ -44,13 +41,19 @@ const parse = (string, tag = "b") => {
         expression = expression + string[pointer];
         pointer++;
       } else {
-        result = result + addTagsIfWord(expression, tag);
+        result =
+          result +
+          (wordRegEx.test(expression[0])
+            ? addTag(expression, tag)
+            : expression);
         expression = string[pointer];
         pointer++;
       }
     }
   }
-  return result + addTagsIfWord(expression);
+  return (
+    result + (wordRegEx.test(expression[0]) ? addTag(expression) : expression)
+  );
 };
 
-export { parse, wordRegEx, addTagsIfWord, notAWordBoundary, isTag };
+export { parse, wordRegEx, addTag, notAWordBoundary, isTag };
