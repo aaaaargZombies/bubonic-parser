@@ -1,9 +1,9 @@
 const wordRegEx = /[\p{L}'’0-9]/u;
 
-const addBTagesIfWord = (s) => {
+const addTagsIfWord = (s, tag) => {
   if (wordRegEx.test(s[0])) {
-    if (s.length === 1) return `<b>${s}</b>`;
-    return `<b>${s.slice(0, Math.floor(s.length / 2))}</b>${s.slice(
+    if (s.length === 1) return `<${tag}>${s}</${tag}>`;
+    return `<${tag}>${s.slice(0, Math.floor(s.length / 2))}</${tag}>${s.slice(
       Math.floor(s.length / 2),
     )}`;
   }
@@ -15,7 +15,7 @@ const notAWordBoundary = (a, b) => wordRegEx.test(a) === wordRegEx.test(b);
 const isTag = (s) =>
   (s.length === 1 && s === "<") || (/^<\w|^<\//.test(s) && !/<[0-9]/.test(s));
 
-const processInput = (string) => {
+const parse = (string, tag = "b") => {
   // iterate over string pushing letters onto an expression.
   // check if expression is part of HTML tag, don't add extra markup into this
   // if not compare end of expression and current point in string to detect word boundaries
@@ -44,13 +44,13 @@ const processInput = (string) => {
         expression = expression + string[pointer];
         pointer++;
       } else {
-        result = result + addBTagesIfWord(expression);
+        result = result + addTagsIfWord(expression, tag);
         expression = string[pointer];
         pointer++;
       }
     }
   }
-  return result + addBTagesIfWord(expression);
+  return result + addTagsIfWord(expression);
 };
 
 document
