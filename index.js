@@ -5,11 +5,10 @@ const addTag = (s, config) => {
   let openTag = classList.length
     ? `${tag} class="${classList.join(" ")}"`
     : tag;
-  if (s.length === 1) return `<${openTag}>${s}</${tag}>`;
-  return `<${openTag}>${s.slice(
-    0,
-    Math.floor(s.length * split),
-  )}</${tag}>${s.slice(Math.floor(s.length * split))}`;
+  let slicePoint = Math.floor(s.length * split)
+    ? Math.floor(s.length * split)
+    : 1;
+  return `<${openTag}>${s.slice(0, slicePoint)}</${tag}>${s.slice(slicePoint)}`;
 };
 
 const notAWordBoundary = (a, b) => wordRegEx.test(a) === wordRegEx.test(b);

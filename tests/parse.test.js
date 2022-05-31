@@ -26,6 +26,10 @@ test("parse(html, { tag: 'span' }) to add <span> tags to first half of words", (
 `);
 });
 
+test("parse('1') should add a tag around the first (and only) character", () => {
+  expect(parse("1")).toBe("<b>1</b>");
+});
+
 test("parse('1234567890') should add a tag around the first 5 characters", () => {
   expect(parse("1234567890")).toBe("<b>12345</b>67890");
 });
