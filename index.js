@@ -1,10 +1,15 @@
 const wordRegEx = /[\p{L}'’0-9]/u;
 
-const addTag = (s, tag) => {
-  if (s.length === 1) return `<${tag}>${s}</${tag}>`;
-  return `<${tag}>${s.slice(0, Math.floor(s.length / 2))}</${tag}>${s.slice(
-    Math.floor(s.length / 2),
-  )}`;
+const addTag = (s, config) => {
+  let { tag, split, classList } = config;
+  let openTag = classList.length
+    ? `${tag} class="${classList.join(" ")}"`
+    : tag;
+  if (s.length === 1) return `<${openTag}>${s}</${tag}>`;
+  return `<${openTag}>${s.slice(
+    0,
+    Math.floor(s.length * split),
+  )}</${tag}>${s.slice(Math.floor(s.length * split))}`;
 };
 
 const notAWordBoundary = (a, b) => wordRegEx.test(a) === wordRegEx.test(b);
@@ -12,7 +17,16 @@ const notAWordBoundary = (a, b) => wordRegEx.test(a) === wordRegEx.test(b);
 const isTag = (s) =>
   (s.length === 1 && s === "<") || (/^<\w|^<\//.test(s) && !/<[0-9]/.test(s));
 
-const parse = (string, tag = "b") => {
+// CONFIG OBJ
+// {
+// tag: string
+// classList: [string]
+// split: float 0-1
+// }
+const defaultConfig = { tag: "b", classList: [], split: 0.5 };
+
+const parse = (string, optionalConfig) => {
+  const config = { ...defaultConfig, ...optionalConfig };
   let pointer = 1;
   let result = "";
   let expression = string[0];
@@ -43,7 +57,7 @@ const parse = (string, tag = "b") => {
         result =
           result +
           (wordRegEx.test(expression[0])
-            ? addTag(expression, tag)
+            ? addTag(expression, config)
             : expression);
         // clear the expression and continue.
         expression = string[pointer];
@@ -53,7 +67,8 @@ const parse = (string, tag = "b") => {
   }
   // combine the result and remaining expression at end of while loop and return
   return (
-    result + (wordRegEx.test(expression[0]) ? addTag(expression) : expression)
+    result +
+    (wordRegEx.test(expression[0]) ? addTag(expression, config) : expression)
   );
 };
 
