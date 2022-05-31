@@ -30,12 +30,24 @@ test("parse('1234567890') should add a tag around the first 5 characters", () =>
   expect(parse("1234567890")).toBe("<b>12345</b>67890");
 });
 
+test("parse('1234567890', {split: 0}) should add a tag around the first character", () => {
+  expect(parse("1234567890", { split: 0 })).toBe("<b>1</b>234567890");
+});
+
+test("parse('12', {split: 0.1}) should add a tag around the first character", () => {
+  expect(parse("12", { split: 0.1 })).toBe("<b>1</b>2");
+});
+
 test("parse('1234567890', {split: 0.2}) should add a tag around the first 2 characters", () => {
   expect(parse("1234567890", { split: 0.2 })).toBe("<b>12</b>34567890");
 });
 
 test("parse('1234567890', {split: 0.7}) should add a tag around the first 7 characters", () => {
   expect(parse("1234567890", { split: 0.7 })).toBe("<b>1234567</b>890");
+});
+
+test("parse('1234567890', {split: 1}) should add a tag around all the characters", () => {
+  expect(parse("1234567890", { split: 1 })).toBe("<b>1234567890</b>");
 });
 
 test("parse(html, {classList: ['class1', 'class2']}) to add <b> tags to first half of words", () => {
