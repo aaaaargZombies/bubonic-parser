@@ -8,7 +8,7 @@ A simple parser that takes a HTML string and adds new tags to the first half of 
 
 ## Why
 
-![bionic reading](../blob/media/bionicText.jpg?raw=true)
+![bionic reading](../media/bionicText.jpg?raw=true)
 
 Recently this example of text manipulation has been circulating on social media. Many people described how much it aided their reading but the process of producing it has been patented.
 
