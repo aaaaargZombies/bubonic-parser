@@ -1,6 +1,6 @@
 {
   "name": "bubonic-parser",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,10 @@
   },
   "keywords": [],
   "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aaaaargZombies/bubonic-parser"
+  },
   "license": "ISC",
   "devDependencies": {
     "vitest": "^0.12.9"

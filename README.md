@@ -29,7 +29,6 @@ I offer you this simple alternative so you can build tools that empower rather t
 ## How
 
 ```sh
-**TODO**
 npm i bubonic-parser
 ```
 
