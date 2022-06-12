@@ -25,12 +25,12 @@ test("notAWordBoundary('1', '2') to return true if given a number", () => {
   expect(notAWordBoundary("1", "2")).toBe(true);
 });
 
-// greek
+// Greek
 test("notAWordBoundary('β', 'η') to return true if given a number", () => {
   expect(notAWordBoundary("β", "η")).toBe(true);
 });
 
-// russion
+// Cyrillic
 test("notAWordBoundary('и', 'ю') to return true if given a number", () => {
   expect(notAWordBoundary("и", "ю")).toBe(true);
 });
