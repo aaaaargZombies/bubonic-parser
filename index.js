@@ -1,20 +1,24 @@
 const wordRegEx = /[\p{L}'’0-9]/u;
 
-const addTag = (s, config) => {
+const addTag = (string, config) => {
   let { tag, split, classList } = config;
   let openTag = classList.length
     ? `${tag} class="${classList.join(" ")}"`
     : tag;
-  let slicePoint = Math.floor(s.length * split)
-    ? Math.floor(s.length * split)
+  let slicePoint = Math.floor(string.length * split)
+    ? Math.floor(string.length * split)
     : 1;
-  return `<${openTag}>${s.slice(0, slicePoint)}</${tag}>${s.slice(slicePoint)}`;
+  return `<${openTag}>${string.slice(0, slicePoint)}</${tag}>${string.slice(
+    slicePoint,
+  )}`;
 };
 
-const notAWordBoundary = (a, b) => wordRegEx.test(a) === wordRegEx.test(b);
+const notAWordBoundary = (charA, charB) =>
+  wordRegEx.test(charA) === wordRegEx.test(charB);
 
-const isTag = (s) =>
-  (s.length === 1 && s === "<") || (/^<\w|^<\//.test(s) && !/<[0-9]/.test(s));
+const isTag = (string) =>
+  (string.length === 1 && string === "<") ||
+  (/^<\w|^<\//.test(string) && !/<[0-9]/.test(string));
 
 // CONFIG OBJ
 // {
