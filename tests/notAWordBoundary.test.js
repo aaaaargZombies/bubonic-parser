@@ -64,3 +64,18 @@ test("notAWordBoundary('ص', 'ي') to return true if given a number", () => {
 test("notAWordBoundary('ص', ' ') to return false if given a number", () => {
   expect(notAWordBoundary("ص", " ")).toBe(false);
 });
+
+// HTML tag stuff
+test("notAWordBoundary(' ', '<') to return true if given a number", () => {
+  expect(notAWordBoundary(" ", "<")).toBe(true);
+});
+
+// HTML tag stuff
+test("notAWordBoundary('e', '<') to return false if given a number", () => {
+  expect(notAWordBoundary("e", "<")).toBe(false);
+});
+
+// HTML tag stuff
+test("notAWordBoundary('<', 'e') to return false if given a number", () => {
+  expect(notAWordBoundary("<", "e")).toBe(false);
+});

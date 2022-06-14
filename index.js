@@ -46,8 +46,8 @@ const parse = (string, optionalConfig) => {
       // if not a tag compare end of expression and current point in string to detect word boundaries
       if (
         notAWordBoundary(expression[expression.length - 1], string[pointer]) &&
+        !isTag(string[pointer])
         // if no boundary detected continue adding to expression
-        string[pointer] !== "<"
       ) {
         expression = expression + string[pointer];
         pointer++;
